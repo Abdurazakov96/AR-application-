@@ -10,7 +10,11 @@ import ARKit
 
 class ViewController: UIViewController {
     
+        // MARK: - IBOutlets
+    
     @IBOutlet var sceneView: ARSCNView!
+    
+        // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,8 +41,8 @@ class ViewController: UIViewController {
         threeSecond.position = SCNVector3(x:-1.25, y: 1.01, z: -5)
         scene.rootNode.addChildNode(threeSecond)
         
-        
-        sceneView.scene = scene
+      
+        sceneView.scene = scene  
         sceneView.autoenablesDefaultLighting = true
         
     }
@@ -52,14 +56,16 @@ class ViewController: UIViewController {
         sceneView.session.pause()
     }
     
-    func loadModel(name: String) -> SCNNode? {
+        // Private Methods
+    
+    private func loadModel(name: String) -> SCNNode? {
         guard let scene = SCNScene(named: name) else {return nil}
         let node = scene.rootNode.clone()
         
         return node
     }
     
-    func createChair () -> SCNNode{
+    private func createChair () -> SCNNode{
         let chair = SCNBox(width: 0.5, height: 0.5, length: 1, chamferRadius: 0)
         let color = UIImage(named: "Courtyard.scnassets/chairTexture.jpg")!
         let material = SCNMaterial()
@@ -69,10 +75,9 @@ class ViewController: UIViewController {
         let thing = SCNNode(geometry: chair)
         
         return thing
-        
     }
     
-    func createTree () -> SCNNode {
+    private func createTree () -> SCNNode {
         
         let stall = SCNCylinder(radius: 0.2, height: 3)
         stall.firstMaterial?.diffuse.contents = UIColor.brown
@@ -86,7 +91,7 @@ class ViewController: UIViewController {
         node.addChildNode(createSphere)
         
         return node
-        
     }
+    
 }
 
